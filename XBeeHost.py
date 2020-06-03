@@ -81,6 +81,7 @@ serdev1 = '/dev/ttyACM0'
 s1 = serial.Serial(serdev1, 9600)
 t = np.arange(0, 2, 0.1)
 x = np.arange(0, 2, 0.1)
+y = np.arange(0, 2, 0.1)
 time.sleep(5)
 print("start sending RPC")
 mqttc.publish(topic, "0.001")
@@ -93,7 +94,12 @@ for i in range(0, 20):
     line=s1.readline() # Read an echo string from K66F terminated with '\n'
     print(line)
     x[i] = float(line)
-    time.sleep(0.05)
+    time.sleep(0.02)
+    mqttc.publish(topic, line) 
+    line=s1.readline() # Read an echo string from K66F terminated with '\n'
+    print(line)
+    y[i] = float(line)
+    time.sleep(0.03)
     mqttc.publish(topic, line) 
     
 s.close()

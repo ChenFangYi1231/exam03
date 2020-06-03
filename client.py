@@ -13,6 +13,7 @@ mqttc = paho.Client()
 host = "localhost"
 topic = "velocity"
 x = np.arange(0, 2, 0.1)
+y = np.arange(0, 2, 0.1)
 t = np.arange(0, 2, 0.1)
 temp = np.arange(0, 2, 0.1)
 
@@ -50,17 +51,20 @@ while done:
       time.sleep(1)
 print("start")
 for i in range(0,20):
-      time.sleep(0.1)
+      time.sleep(0.05)
       mqttc.loop()
-      #print(mqttc.on_message)
       x[i] = temp[0]
       print(x[i])
+      time.sleep(0.05)
+      mqttc.loop()
+      y[i] = temp[0]
+      print(y[i])
       
 
-fig, ax = plt.subplots(1, 1)
-ax.plot(t,x)
+ax.plot(t,x, 'b', label = 'x', color = 'b')
+ax.plot(t,y, 'r', label = 'y', color = 'r')
 ax.set_xlabel('Time')
 ax.set_ylabel('velocity')
+ax.legend()
 plt.show()
-
       

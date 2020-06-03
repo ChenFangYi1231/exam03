@@ -33,7 +33,7 @@ Thread t, t1;
 float a[3];
 uint8_t data[2], res[6];
 int16_t acc16;
-float v;
+float v, v1;
 
 void acc(void);
 void replyAcc(Arguments *in, Reply *out);
@@ -158,6 +158,7 @@ void FXOS8700CQ_writeRegs(uint8_t * data, int len) {
 void replyAcc(Arguments *in, Reply *out)
 {
     pc.printf("%f\r\n", v);
+    pc.printf("%f\r\n", v1);
 }
 
 void acc(void)
@@ -183,6 +184,7 @@ void acc(void)
             acc16 -= UINT14_MAX;
         a[2] = ((float)acc16) / 4096.0f;
         v = a[0]*9.8*0.1;
+        v = a[1]*9.8*0.1;
         wait(0.1);
 
    }
