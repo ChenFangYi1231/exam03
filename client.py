@@ -60,7 +60,7 @@ for i in range(0,20):
       y[i] = temp[0]
       print(y[i])
       
-
+fig, ax = plt.subplots(1, 1)
 ax.plot(t,x, 'b', label = 'x', color = 'b')
 ax.plot(t,y, 'r', label = 'y', color = 'r')
 ax.set_xlabel('Time')
